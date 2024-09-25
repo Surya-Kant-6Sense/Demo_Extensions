@@ -2,10 +2,10 @@
   Name: index.html
   Purpose: Feedback Form for submitting feedback to the Feedback Extension
   Author: Surya Kant Mani
-  Version: 1.0.2
+  Version: 1.0.4
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Improved UI with #192232 color scheme, dynamic 3D button, smaller font, and image/screenshot attachment option.
+  Update Description: Fixed cross button, added screenshot option, improved styling and spacing, made form smaller.
   Production Go-Live Date: N/A
 -->
 
@@ -30,11 +30,11 @@
 
   <!-- Feedback Form Modal -->
   <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-sm"> <!-- Made the form width smaller with 'modal-sm' -->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #192232;">
           <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9;">Submit Your Feedback</h5>
-          <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+          <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Fix for cross button -->
         </div>
         <div class="modal-body">
           <!-- Thank You Message (Initially Hidden) -->
@@ -47,24 +47,24 @@
           <form id="feedback-form">
             <!-- Dashboard (Workbook) field: Pre-filled and uneditable -->
             <div class="mb-3">
-              <label for="dashboard" class="form-label" style="font-size: 14px; color: #192232;">Dashboard</label>
-              <input type="text" class="form-control" id="dashboard" style="font-size: 12px; color: #192232;" disabled>
+              <label for="dashboard" class="form-label" style="font-size: 11px; color: #192232;">Dashboard</label>
+              <input type="text" class="form-control" id="dashboard" style="font-size: 11px; color: #192232;" disabled>
             </div>
 
             <!-- Screen field: Pre-filled, but editable in case the user wants to change it -->
             <div class="mb-3">
-              <label for="screen" class="form-label" style="font-size: 14px; color: #192232;">Screen</label>
-              <input type="text" class="form-control" id="screen" style="font-size: 12px;">
+              <label for="screen" class="form-label" style="font-size: 11px; color: #192232;">Screen</label>
+              <input type="text" class="form-control" id="screen" style="font-size: 11px;">
             </div>
 
             <!-- View field: Dropdown containing the name of the last interacted sheet -->
             <div class="mb-3">
-              <label for="view" class="form-label" style="font-size: 14px; color: #192232;">View</label>
+              <label for="view" class="form-label" style="font-size: 11px; color: #192232;">View</label>
               <div class="input-group">
-                <select class="form-select" id="view" style="font-size: 12px;">
+                <select class="form-select" id="view" style="font-size: 11px;">
                   <!-- Dynamically populated with the sheet names -->
                 </select>
-                <span class="input-group-text" style="background-color: #dde3e9;">
+                <span class="input-group-text" style="background-color: #dde3e9; margin-left: 10px;"> <!-- Added space between checkbox and text -->
                   <input type="checkbox" id="no-view"> Not related to any view
                 </span>
               </div>
@@ -72,8 +72,8 @@
 
             <!-- Feedback Type dropdown -->
             <div class="mb-3">
-              <label for="feedback-type" class="form-label" style="font-size: 14px; color: #192232;">Type</label>
-              <select class="form-select" id="feedback-type" style="font-size: 12px;">
+              <label for="feedback-type" class="form-label" style="font-size: 11px; color: #192232;">Type</label>
+              <select class="form-select" id="feedback-type" style="font-size: 11px;">
                 <option value="feature">Feature Request</option>
                 <option value="general">General Feedback</option>
                 <option value="data_anomaly">Data Anomaly</option>
@@ -89,14 +89,15 @@
 
             <!-- Feedback text area -->
             <div class="mb-3">
-              <label for="feedback-text" class="form-label" style="font-size: 14px; color: #192232;">Feedback</label>
+              <label for="feedback-text" class="form-label" style="font-size: 11px; color: #192232;">Feedback</label>
               <textarea class="form-control" id="feedback-text" rows="3" style="font-size: 11px;" placeholder="Separate multiple feedbacks with a semicolon ';'"></textarea>
             </div>
 
             <!-- Image/Screenshot Attachment -->
             <div class="mb-3">
-              <label for="screenshot" class="form-label" style="font-size: 14px; color: #192232;">Attach Image or Screenshot</label>
-              <input type="file" class="form-control" id="screenshot" accept="image/*" style="font-size: 12px;">
+              <label for="screenshot" class="form-label" style="font-size: 11px; color: #192232;">Attach Image or Screenshot</label>
+              <input type="file" class="form-control" id="screenshot" accept="image/*" style="font-size: 11px;">
+              <button type="button" class="btn btn-sm btn-primary mt-2" id="take-screenshot" style="font-size: 11px;">Take Screenshot</button> <!-- Added screenshot option -->
             </div>
 
             <!-- Submit button -->
