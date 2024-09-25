@@ -1,11 +1,11 @@
 <!--
   Name: index.html
-  Purpose: Feedback Form for submitting feedback to the Feedback Extension
+  Purpose: Feedback Form for submitting feedback to the Feedback Extension.
   Author: Surya Kant Mani
-  Version: 1.0.7
+  Version: 1.0.8
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Added shine effect to buttons, made the extension button rectangular, added screenshot preview, removed 'Not related to any view' checkbox, and more.
+  Update Description: Replaced cross button with 'Close' button, added text enlargement with shine on hover, fixed modal closure, updated button styles, and added sound effects.
   Production Go-Live Date: N/A
 -->
 
@@ -33,8 +33,9 @@
     <div class="modal-dialog modal-sm"> <!-- Smaller modal width -->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #192232;">
-          <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9; font-size: 14px;">Submit Your Feedback</h5> <!-- Reduced font size by 1px -->
-          <button type="button" class="btn-close close-modal" aria-label="Close" style="color: #dd3e39; font-size: 1.1em;"></button> <!-- Updated cross button -->
+          <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9; font-size: 14px;">Submit Your Feedback</h5>
+          <!-- Close Button (Replaced cross button) -->
+          <button type="button" class="btn btn-close-custom shine-effect" id="close-btn">Close</button> <!-- Updated button with text enlargement and shine -->
         </div>
         <div class="modal-body">
           <!-- Thank You Message (Initially Hidden) -->
@@ -62,7 +63,6 @@
               <label for="view" class="form-label" style="font-size: 11px; color: #192232;">View</label>
               <select class="form-select" id="view" style="font-size: 11px;">
                 <option value="entire_screen">Entire Screen</option> <!-- Added 'Entire Screen' as the default option -->
-                <!-- Dynamically populated with the sheet names -->
               </select>
             </div>
 
@@ -101,15 +101,20 @@
               <img src="" id="screenshot-preview-img" alt="Screenshot Preview" class="img-fluid" />
             </div>
 
-            <!-- Submit button (center-aligned, 60% width) -->
+            <!-- Submit button (center-aligned, 70% width) -->
             <div class="form-buttons d-flex justify-content-center">
-              <button type="submit" class="btn dynamic-btn shine-effect" id="submit-feedback" style="width: 60%;">Submit</button> <!-- Submit button with shine effect -->
+              <button type="submit" class="btn dynamic-btn shine-effect" id="submit-feedback" style="width: 70%; background-color: #192232; color: #dde3e9; border-radius: 12px;">Submit</button> <!-- Submit button with shine effect -->
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Sound Effects for Form Opening/Closing -->
+  <audio id="open-sound" src="assets/open-sound.mp3"></audio>
+  <audio id="close-sound" src="assets/close-sound.mp3"></audio>
+  <audio id="submit-sound" src="assets/submit-sound.mp3"></audio>
 
   <!-- Include Bootstrap JS and Popper.js -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
