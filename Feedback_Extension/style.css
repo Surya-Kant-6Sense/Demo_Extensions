@@ -2,10 +2,10 @@
   Name: style.css
   Purpose: Custom styling for the Feedback Extension UI.
   Author: Surya Kant Mani
-  Version: 1.0.8
+  Version: 1.0.9
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Updated shine effect, text enlargement on hover, and curved shine strip for three-dimensional effect.
+  Update Description: Updated shine effect, text enlargement on hover, and curved shine strip for three-dimensional effect, added dynamic form width, and improved image handling.
   Production Go-Live Date: N/A
 */
 
@@ -13,7 +13,7 @@
 .shine-effect {
   position: relative;
   overflow: hidden;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 
 .shine-effect::before {
@@ -35,7 +35,7 @@
 
 /* Text enlargement on hover */
 .shine-effect:hover {
-  font-size: 1.3em; /* Slight text enlargement */
+  font-size: 1.1em; /* Slight text enlargement */
 }
 
 /* Close button styling (replacing cross button) */
@@ -49,22 +49,27 @@
 }
 
 .btn-close-custom:hover {
-  font-size: 1.3em; /* Enlarge text on hover */
+  font-size: 1.1em; /* Enlarge text on hover */
   background-color: #d0d0d0;
   color: #b30000;
   cursor: pointer;
 }
 
-/* Screenshot preview styling */
-#screenshot-preview {
+/* Image preview styling (same for screenshot) */
+#image-preview {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#screenshot-preview img {
+#image-preview img {
   max-width: 100%;
   border: 1px solid #192232;
   border-radius: 8px;
   margin-top: 10px;
+}
+
+/* Dynamic textarea growth */
+textarea {
+  resize: both;
 }
