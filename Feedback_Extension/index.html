@@ -2,10 +2,10 @@
   Name: index.html
   Purpose: Feedback Form for submitting feedback to the Feedback Extension.
   Author: Surya Kant Mani
-  Version: 1.0.8
+  Version: 1.0.9
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Replaced cross button with 'Close' button, added text enlargement with shine on hover, fixed modal closure, updated button styles, and added sound effects.
+  Update Description: Fixed close button, added image and screenshot handling, added Genie effect, dynamic form width, and integrated with Tableau data source.
   Production Go-Live Date: N/A
 -->
 
@@ -30,7 +30,7 @@
 
   <!-- Feedback Form Modal with Genie effect -->
   <div class="modal fade modal-genie" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm"> <!-- Smaller modal width -->
+    <div class="modal-dialog"> <!-- Dynamic modal width -->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #192232;">
           <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9; font-size: 14px;">Submit Your Feedback</h5>
@@ -83,7 +83,7 @@
               <input type="checkbox" id="mark-urgent"> Mark as Urgent
             </div>
 
-            <!-- Feedback text area -->
+            <!-- Feedback text area (dynamic width and height) -->
             <div class="mb-3">
               <label for="feedback-text" class="form-label" style="font-size: 11px; color: #192232;">Feedback</label>
               <textarea class="form-control" id="feedback-text" rows="3" style="font-size: 11px;" placeholder="Separate multiple feedbacks with a semicolon ';'"></textarea>
@@ -95,15 +95,15 @@
               <button type="button" class="btn btn-sm btn-primary shine-effect" id="take-screenshot" style="font-size: 11px; width: 45%;">Take Screenshot</button> <!-- Aligned horizontally and with shine effect -->
             </div>
 
-            <!-- Screenshot preview (Initially hidden, shown after a screenshot is taken) -->
-            <div id="screenshot-preview" class="mb-3 d-none">
-              <label for="screenshot-preview" class="form-label" style="font-size: 11px; color: #192232;">Screenshot Preview:</label>
-              <img src="" id="screenshot-preview-img" alt="Screenshot Preview" class="img-fluid" />
+            <!-- Screenshot or Image preview (Initially hidden, shown after an image or screenshot is taken/attached) -->
+            <div id="image-preview" class="mb-3 d-none">
+              <label for="image-preview" class="form-label" style="font-size: 11px; color: #192232;">Image Preview:</label>
+              <img src="" id="image-preview-img" alt="Image Preview" class="img-fluid" />
             </div>
 
-            <!-- Submit button (center-aligned, 70% width) -->
+            <!-- Submit button (center-aligned, 60% width) -->
             <div class="form-buttons d-flex justify-content-center">
-              <button type="submit" class="btn dynamic-btn shine-effect" id="submit-feedback" style="width: 70%; background-color: #192232; color: #dde3e9; border-radius: 12px;">Submit</button> <!-- Submit button with shine effect -->
+              <button type="submit" class="btn dynamic-btn shine-effect" id="submit-feedback" style="font-size: 12px; width: 60%; background-color: #192232; color: #dde3e9; border-radius: 12px;">Submit</button> <!-- Submit button with shine effect -->
             </div>
           </form>
         </div>
@@ -112,9 +112,9 @@
   </div>
 
   <!-- Sound Effects for Form Opening/Closing -->
-  <audio id="open-sound" src="assets/open-sound.mp3"></audio>
-  <audio id="close-sound" src="assets/close-sound.mp3"></audio>
-  <audio id="submit-sound" src="assets/submit-sound.mp3"></audio>
+  <audio id="open-sound" src="assets/open-sound.mp3"></audio> <!-- Replace with your audio -->
+  <audio id="close-sound" src="assets/close-sound.mp3"></audio> <!-- Replace with your audio -->
+  <audio id="submit-sound" src="assets/submit-sound.mp3"></audio> <!-- Replace with your audio -->
 
   <!-- Include Bootstrap JS and Popper.js -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
