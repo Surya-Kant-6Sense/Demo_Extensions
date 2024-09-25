@@ -2,15 +2,15 @@
   Name: index.html
   Purpose: Feedback Form for submitting feedback to the Feedback Extension
   Author: Surya Kant Mani
-  Version: 1.0.0
+  Version: 1.0.1
   Created At: September 27, 2024
-  Updated At: N/A
+  Updated At: September 27, 2024
   Production Go-Live Date: N/A
   Developer Notes:
   - Clicking the feedback icon opens a modal for the feedback form.
   - Feedback is submitted, split by ';' delimiter, and sent to Excel and Slack.
+  - Both Cancel and Close buttons close the modal.
   - Gradient buttons and sleek design give the UI a polished app-like appearance.
-  - The Thank You message appears after submission, with a Close button.
 -->
 
 <!DOCTYPE html>
@@ -38,14 +38,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="feedbackModalLabel">Submit Your Feedback</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close close-modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <!-- Thank You Message (Initially Hidden) -->
           <div id="thank-you-message" class="d-none">
             <h5>Thank you for your feedback!</h5>
             <p>It has been recorded and someone from the DA Team will reach out to you soon.</p>
-            <button class="btn btn-primary" id="close-thank-you">Close</button>
+            <button class="btn btn-primary close-modal" id="close-thank-you">Close</button>
           </div>
 
           <!-- Feedback Form -->
@@ -101,7 +101,7 @@
             <!-- Submit and Cancel buttons -->
             <div class="form-buttons">
               <button type="submit" class="btn gradient-btn" id="submit-feedback">Submit</button>
-              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-outline-danger close-modal">Cancel</button>
             </div>
           </form>
         </div>
