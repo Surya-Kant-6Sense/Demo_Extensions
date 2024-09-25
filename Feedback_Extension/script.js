@@ -1,11 +1,11 @@
 /*
   Name: script.js
-  Purpose: Handles form submission, Excel updates, Tableau metadata fetching, modal controls, and screenshot functionality.
+  Purpose: Handles form submission, Excel updates, Tableau metadata fetching, modal controls, and screenshot functionality with preview.
   Author: Surya Kant Mani
-  Version: 1.0.6
+  Version: 1.0.7
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Improved screenshot functionality, aligned file and screenshot buttons horizontally, added cross button dynamic behavior.
+  Update Description: Added screenshot preview feature, fixed cross button hover effect, and improved form controls.
   Production Go-Live Date: N/A
 */
 
@@ -30,14 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const option = document.createElement('option');
       option.textContent = sheet.name;
       viewDropdown.appendChild(option);
-    });
-
-    /* Handle 'Not related to any view' checkbox */
-    document.getElementById('no-view').addEventListener('change', function() {
-      viewDropdown.disabled = this.checked;
-      if (this.checked) {
-        viewDropdown.value = 'All';
-      }
     });
 
     /* Handle form submission */
@@ -98,9 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Function to take a screenshot within the dashboard */
 function takeScreenshot() {
   tableau.extensions.dashboardContent.dashboard.captureAsync().then(function(dataUri) {
-    const img = new Image();
-    img.src = dataUri;
-    document.body.appendChild(img);
+    const screenshotPreview = document.getElementById('screenshot-preview');
+    const imgElement = document.getElementById('screenshot-preview-img');
+    imgElement.src = dataUri;
+    screenshotPreview.classList.remove('d-none'); // Show screenshot preview
     alert('Screenshot captured successfully!');
   }).catch(function(error) {
     console.error("Error taking screenshot: ", error);
