@@ -1,5 +1,5 @@
-# 6Sight_Extensions
-This repository contains all the 6Sight Extensions for Tableau being developed
+# Demo_Extensions
+This repository contains all the Extensions for Tableau being developed
 This repository contains multiple Tableau extensions built to enhance data analytics and user experience.
 
 Each extension is placed in its own subdirectory with the necessary files and detailed instructions for deployment and integration.
@@ -8,9 +8,9 @@ Each extension is placed in its own subdirectory with the necessary files and de
 
 ## Extensions
 
-### 1. [6Sight Feedback Extension](./6SightFeedbackExtension/)
+### 1. [Feedback Extension](./FeedbackExtension/)
 - **Description**: A feedback extension for Tableau dashboards with Slack and Jira integration. Allows users to submit feedback directly from Tableau and track it through Slack or Jira.
-- **Directory**: `6SightFeedbackExtension`
+- **Directory**: `FeedbackExtension`
 - **Status**: Version 1.0.0
 
 ### 2. [YourNextExtension](./YourNextExtension/)
