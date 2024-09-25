@@ -1,0 +1,19 @@
+{
+  "manifest-version": "1",
+  "name": "6Sight Feedback Extension",
+  "description": "Extension for submitting and tracking feedback within Tableau dashboards.",
+  "version": "1.0.0",
+  "author": "Surya Kant Mani",
+  "permissions": [
+    "extensions"
+  ],
+  "homepage": "https://github.com/your-repo-link",
+  "icon": "path/to/feedback-icon.png",
+  "script": "script.js",
+  "style": "style.css",
+  "ui": {
+    "html": "index.html",
+    "width": 800,
+    "height": 600
+  }
+}
