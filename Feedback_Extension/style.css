@@ -3,7 +3,7 @@
   Purpose: Custom styling for the Feedback Extension UI.
   Author: Surya Kant Mani
   Version: 1.0.0
-  Created At: September 26, 2024
+  Created At: September 27, 2024
   Updated At: N/A
   Updated By: N/A
   Update Description: Initial version.
@@ -49,19 +49,36 @@
   padding: 20px;
 }
 
-.form-buttons button {
-  width: 120px;
-  padding: 10px;
-  margin-right: 10px;
+/* Gradient button styling */
+.gradient-btn {
+  background: linear-gradient(135deg, #13bbb2, #ff583d);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background 0.3s ease;
   font-weight: bold;
 }
 
-/* Styling for image/screenshot preview */
-#screenshot-preview {
-  border: 1px dashed #ccc;
-  padding: 10px;
-  min-height: 100px;
-  display: none;
-  margin-top: 15px;
-  background-color: #f9f9f9;
+.gradient-btn:hover {
+  background: linear-gradient(135deg, #ff583d, #13bbb2);
+}
+
+/* Styling for the Cancel button */
+.btn-outline-danger {
+  border: 2px solid #ff583d;
+  color: #ff583d;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.btn-outline-danger:hover {
+  background-color: #ff583d;
+  color: white;
+}
+
+/* Thank You Message styling */
+#thank-you-message {
+  text-align: center;
+  margin-top: 20px;
 }
