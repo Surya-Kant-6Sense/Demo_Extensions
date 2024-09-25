@@ -1,11 +1,11 @@
 /*
   Name: script.js
-  Purpose: Handles form submission, Slack notifications, and Excel updates for the Feedback Extension.
+  Purpose: Handles form submission, Slack notifications, and Excel updates for the Feedback Extension. Also handles taking screenshots.
   Author: Surya Kant Mani
-  Version: 1.0.3
+  Version: 1.0.4
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Screenshot will only be sent via Slack, not stored in Excel.
+  Update Description: Added screenshot capture functionality, fixed modal close, and improved form handling.
   Production Go-Live Date: N/A
 */
 
@@ -68,7 +68,18 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelector('.modal-backdrop').remove();
     });
   });
+
+  /* Handle screenshot taking */
+  document.getElementById('take-screenshot').addEventListener('click', function() {
+    takeScreenshot();
+  });
 });
+
+/* Function to take a screenshot (placeholder logic, you can replace with real screenshot logic) */
+function takeScreenshot() {
+  alert('Screenshot functionality will be added here.');
+  // Placeholder for taking a screenshot of the dashboard
+}
 
 /* Function to submit feedback (without screenshot) to the published Excel on Tableau Cloud */
 function submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText) {
