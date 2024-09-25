@@ -2,10 +2,10 @@
   Name: index.html
   Purpose: Feedback Form for submitting feedback to the Feedback Extension
   Author: Surya Kant Mani
-  Version: 1.0.4
+  Version: 1.0.6
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Fixed cross button, added screenshot option, improved styling and spacing, made form smaller.
+  Update Description: Centered Submit button, added dynamic cross button, aligned file and screenshot options horizontally, updated icon defaults, and more.
   Production Go-Live Date: N/A
 -->
 
@@ -23,18 +23,18 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Feedback Icon to Open Modal -->
-  <button class="btn feedback-btn" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-    <img src="assets/feedback-icon.png" alt="Feedback Icon">
+  <!-- Extension Icon/Button to Open Modal -->
+  <button class="btn feedback-btn" id="open-modal-btn" data-bs-toggle="modal" data-bs-target="#feedbackModal" style="background-color: #192232; color: #dde3e9; font-size: 10px;">
+    Feedback
   </button>
 
   <!-- Feedback Form Modal -->
   <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm"> <!-- Made the form width smaller with 'modal-sm' -->
+    <div class="modal-dialog modal-sm"> <!-- Smaller modal width -->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #192232;">
           <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9;">Submit Your Feedback</h5>
-          <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button> <!-- Fix for cross button -->
+          <button type="button" class="btn-close close-modal" aria-label="Close" style="color: grey;"></button> <!-- Updated cross button -->
         </div>
         <div class="modal-body">
           <!-- Thank You Message (Initially Hidden) -->
@@ -64,8 +64,8 @@
                 <select class="form-select" id="view" style="font-size: 11px;">
                   <!-- Dynamically populated with the sheet names -->
                 </select>
-                <span class="input-group-text" style="background-color: #dde3e9; margin-left: 10px;"> <!-- Added space between checkbox and text -->
-                  <input type="checkbox" id="no-view"> Not related to any view
+                <span class="input-group-text" style="background-color: #dde3e9; margin-left: 10px;">
+                  <input type="checkbox" id="no-view" style="font-size: 10px;"> Not related to any view
                 </span>
               </div>
             </div>
@@ -93,16 +93,15 @@
               <textarea class="form-control" id="feedback-text" rows="3" style="font-size: 11px;" placeholder="Separate multiple feedbacks with a semicolon ';'"></textarea>
             </div>
 
-            <!-- Image/Screenshot Attachment -->
-            <div class="mb-3">
-              <label for="screenshot" class="form-label" style="font-size: 11px; color: #192232;">Attach Image or Screenshot</label>
-              <input type="file" class="form-control" id="screenshot" accept="image/*" style="font-size: 11px;">
-              <button type="button" class="btn btn-sm btn-primary mt-2" id="take-screenshot" style="font-size: 11px;">Take Screenshot</button> <!-- Added screenshot option -->
+            <!-- Image/Screenshot Attachment (aligned horizontally) -->
+            <div class="mb-3 d-flex justify-content-between">
+              <input type="file" class="form-control" id="screenshot" accept="image/*" style="font-size: 11px; width: 45%;">
+              <button type="button" class="btn btn-sm btn-primary" id="take-screenshot" style="font-size: 11px; width: 45%;">Take Screenshot</button> <!-- Aligned horizontally -->
             </div>
 
-            <!-- Submit button -->
-            <div class="form-buttons">
-              <button type="submit" class="btn dynamic-btn" id="submit-feedback">Submit</button>
+            <!-- Submit button (center-aligned, 60% width) -->
+            <div class="form-buttons d-flex justify-content-center">
+              <button type="submit" class="btn dynamic-btn" id="submit-feedback" style="width: 60%;">Submit</button>
             </div>
           </form>
         </div>
