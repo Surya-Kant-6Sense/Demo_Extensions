@@ -10,16 +10,8 @@ Each extension is placed in its own subdirectory with the necessary files and de
 
 ### 1. [Feedback_Extension](./Feedback_Extension/)
 - **Description**: A feedback extension for Tableau dashboards with Slack and Jira integration. Allows users to submit feedback directly from Tableau and track it through Slack or Jira.
-- **Directory**: `FeedbackExtension`
+- **Directory**: `Feedback_Extension`
 - **Status**: Version 1.0.0
-
-### 2. [YourNextExtension](./YourNextExtension/)
-- **Description**: Brief description of your next extension.
-- **Directory**: `YourNextExtension`
-- **Status**: In development
-
-### 3. [FutureExtensionName](./FutureExtensionName/)
-- **Description**: Placeholder for future extensions.
 
 ---
 
@@ -30,7 +22,7 @@ This repository is organized as follows:
 ```bash
 ExtensionsRepository/
 │
-├── FeedbackExtension/  # Directory for the 6Sight Feedback extension
+├── FeedbackExtension/  # Directory for the Feedback extension
 │   ├── index.html
 │   ├── tracker.html
 │   ├── script.js
@@ -38,15 +30,7 @@ ExtensionsRepository/
 │   ├── manifest.json
 │   ├── README.md
 │
-├── YourNextExtension/  # Placeholder directory for another extension
-│   ├── index.html
-│   ├── script.js
-│   ├── style.css
-│   ├── manifest.json
-│   ├── README.md
-│
-├── FutureExtensionName/  # Placeholder for a future extension
-│   ├── ...
+
 │
 ├── README.md  # This file, which contains details about the entire repository
 └── .gitignore  # Git ignore file to exclude specific files and directories
