@@ -2,10 +2,10 @@
   Name: style.css
   Purpose: Custom styling for the Feedback Extension UI.
   Author: Surya Kant Mani
-  Version: 1.0.2
+  Version: 1.0.4
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Updated colors to #192232 and #dde3e9, added dynamic 3D button styling, and changed font size.
+  Update Description: Added hover effect for Submit button, smaller font size for labels, and improved spacing.
   Production Go-Live Date: N/A
 */
 
@@ -33,11 +33,11 @@
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Submit button with 3D effect */
+/* Submit button with 3D effect and hover border */
 .dynamic-btn {
   background-color: #192232;
   color: #dde3e9;
-  font-size: 12px;
+  font-size: 11px;
   padding: 10px 20px;
   border-radius: 10px;
   border: none;
@@ -48,18 +48,19 @@
 .dynamic-btn:hover {
   background-color: #dde3e9;
   color: #192232;
+  border: 2px solid #192232;  /* Added border on hover */
   transform: translateY(-2px);
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Styling for form labels */
 .form-label {
-  font-size: 14px;
+  font-size: 11px;
   color: #192232;
 }
 
 .form-control {
-  font-size: 12px;
+  font-size: 11px;
   color: #192232;
 }
 
