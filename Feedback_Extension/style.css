@@ -2,77 +2,59 @@
   Name: style.css
   Purpose: Custom styling for the Feedback Extension UI.
   Author: Surya Kant Mani
-  Version: 1.0.4
+  Version: 1.0.7
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Added hover effect for Submit button, smaller font size for labels, and improved spacing.
+  Update Description: Added shine effect to buttons, improved visual styles for the cross button, and adjusted form layout.
   Production Go-Live Date: N/A
 */
 
-/* Basic styling for the feedback button */
-.feedback-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #192232;
-  border-radius: 50%;
-  padding: 15px;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease;
-}
-
-.feedback-btn:hover {
-  background-color: #0a8f90;
-}
-
-/* Modal styling */
-.modal-content {
-  border-radius: 15px;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Submit button with 3D effect and hover border */
-.dynamic-btn {
-  background-color: #192232;
-  color: #dde3e9;
-  font-size: 11px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Shine effect for buttons */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
   transition: all 0.3s ease;
 }
 
-.dynamic-btn:hover {
-  background-color: #dde3e9;
-  color: #192232;
-  border: 2px solid #192232;  /* Added border on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+.shine-effect::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  transform: rotate(45deg);
+  transition: all 0.6s ease-in-out;
 }
 
-/* Styling for form labels */
-.form-label {
-  font-size: 11px;
-  color: #192232;
+.shine-effect:hover::before {
+  top: 200%;
+  left: 200%;
 }
 
-.form-control {
-  font-size: 11px;
-  color: #192232;
+/* Cross button with dynamic hover effect */
+.btn-close {
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
 }
 
-#feedback-text {
-  font-size: 11px;
+.btn-close:hover {
+  transform: rotate(360deg);
+  color: #dd3e39; /* Bright red color for visibility */
+  font-size: 1.3rem; /* Slightly larger on hover */
 }
 
-#thank-you-message h5 {
-  font-size: 14px;
-  color: #192232;
+/* Screenshot preview styling */
+#screenshot-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#thank-you-message p {
-  font-size: 12px;
+#screenshot-preview img {
+  max-width: 100%;
+  border: 1px solid #192232;
+  border-radius: 8px;
+  margin-top: 10px;
 }
