@@ -2,18 +2,18 @@
   Name: style.css
   Purpose: Custom styling for the Feedback Extension UI.
   Author: Surya Kant Mani
-  Version: 1.0.7
+  Version: 1.0.8
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Added shine effect to buttons, improved visual styles for the cross button, and adjusted form layout.
+  Update Description: Updated shine effect, text enlargement on hover, and curved shine strip for three-dimensional effect.
   Production Go-Live Date: N/A
 */
 
-/* Shine effect for buttons */
+/* Shine effect for buttons with curved strip */
 .shine-effect {
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .shine-effect::before {
@@ -23,7 +23,7 @@
   left: -100%;
   width: 300%;
   height: 300%;
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   transform: rotate(45deg);
   transition: all 0.6s ease-in-out;
 }
@@ -33,16 +33,26 @@
   left: 200%;
 }
 
-/* Cross button with dynamic hover effect */
-.btn-close {
-  transition: transform 0.5s ease;
-  font-size: 1.4rem;
+/* Text enlargement on hover */
+.shine-effect:hover {
+  font-size: 1.3em; /* Slight text enlargement */
 }
 
-.btn-close:hover {
-  transform: rotate(360deg);
-  color: #dde3e9; /* Grey color for visibility */
-  font-size: 1.3rem; /* Slightly larger on hover */
+/* Close button styling (replacing cross button) */
+.btn-close-custom {
+  background-color: #dde3e9;
+  color: #dd3e39;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;
+  padding: 5px 12px;
+}
+
+.btn-close-custom:hover {
+  font-size: 1.3em; /* Enlarge text on hover */
+  background-color: #d0d0d0;
+  color: #b30000;
+  cursor: pointer;
 }
 
 /* Screenshot preview styling */
