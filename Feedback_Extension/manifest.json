@@ -7,7 +7,7 @@
   "permissions": [
     "extensions"
   ],
-  "homepage": "https://github.com/your-repo-link",
+  "homepage": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/",
   "icon": "Assets/feedback-icon.jpg",
   "script": "script.js",
   "style": "style.css",
