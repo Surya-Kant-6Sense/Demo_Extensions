@@ -13,7 +13,7 @@ The **6Sight Feedback Extension** enhances your Tableau dashboards by allowing u
 - **Image Upload and Screenshots**: Users can attach screenshots of the dashboard or upload additional images when submitting feedback.
 - **Track Previous Feedback**: Users can track and review previous feedback they've submitted.
 
-
+```bash
 Feedback_Extension/
 │
 ├── index.html            # Feedback Form UI
