@@ -1,6 +1,6 @@
-# 6Sight Feedback Extension
+# Feedback Extension
 
-The **6Sight Feedback Extension** enhances your Tableau dashboards by allowing users to submit feedback directly from the dashboard interface. The extension integrates with **Slack** for notifications and comments, and **Jira** for creating tasks based on feedback. Users can also attach screenshots or images and track the status of their feedback in real-time.
+The **Feedback Extension** enhances your Tableau dashboards by allowing users to submit feedback directly from the dashboard interface. The extension integrates with **Slack** for notifications and comments, and **Jira** for creating tasks based on feedback. Users can also attach screenshots or images and track the status of their feedback in real-time.
 
 ---
 
