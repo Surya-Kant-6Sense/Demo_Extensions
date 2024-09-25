@@ -1,11 +1,11 @@
 /*
   Name: script.js
-  Purpose: Handles form submission, Excel updates, Tableau metadata fetching, modal controls, and screenshot functionality with preview.
+  Purpose: Handles form submission, Excel updates, Tableau metadata fetching, modal controls, screenshot functionality, and sound effects.
   Author: Surya Kant Mani
-  Version: 1.0.7
+  Version: 1.0.8
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Added screenshot preview feature, integrated with Excel data source, added comments to explain data source logic.
+  Update Description: Fixed modal closure, added shine and enlargement effects, added sound effects for form actions, and updated Excel submission logic.
   Production Go-Live Date: N/A
 */
 
@@ -27,14 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const userEmail = tableau.extensions.environment.context.userEmail;
     const owner = dashboard.workbook.authorName; // Author of the workbook
     const ownerEmail = dashboard.workbook.authorEmail; // Owner's email
-
-    /* Populate the view dropdown with the names of all sheets in the dashboard */
-    const viewDropdown = document.getElementById('view');
-    dashboard.worksheets.forEach(sheet => {
-      const option = document.createElement('option');
-      option.textContent = sheet.name;
-      viewDropdown.appendChild(option);
-    });
 
     /* Fetch the list of data sources (Excel) in the current dashboard */
     fetchDataSources().then((dataSource) => {
@@ -74,25 +66,29 @@ document.addEventListener('DOMContentLoaded', function() {
         urgentFlag
       });
 
+      /* Play submit sound */
+      document.getElementById('submit-sound').play();
+
       /* Show Thank You message after submission */
       document.getElementById('thank-you-message').classList.remove('d-none');
       document.getElementById('feedback-form').classList.add('d-none');
     });
 
-    /* Handle close modal on cross icon */
-    const closeModalButtons = document.querySelectorAll('.close-modal');
-    closeModalButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        document.getElementById('thank-you-message').classList.add('d-none');
-        document.getElementById('feedback-form').classList.remove('d-none');
-        document.querySelector('.modal').classList.remove('show');
-        document.querySelector('.modal-backdrop').remove();
-      });
+    /* Handle close modal on 'Close' button */
+    document.getElementById('close-btn').addEventListener('click', function() {
+      document.getElementById('feedbackModal').classList.remove('show');
+      document.querySelector('.modal-backdrop').remove();
+      document.getElementById('close-sound').play(); // Play close sound
     });
 
     /* Handle screenshot taking */
     document.getElementById('take-screenshot').addEventListener('click', function() {
       takeScreenshot();
+    });
+
+    /* Play sound when modal is opened */
+    document.getElementById('feedbackModal').addEventListener('shown.bs.modal', function() {
+      document.getElementById('open-sound').play();
     });
   });
 });
@@ -112,11 +108,7 @@ async function fetchDataSources() {
   return excelDataSource;
 }
 
-/* 
-  Function to take a screenshot within the dashboard.
-  Uses Tableau's captureAsync() method to capture a screenshot of the current dashboard.
-  The screenshot is then displayed as a preview in the form.
-*/
+/* Function to take a screenshot within the dashboard */
 function takeScreenshot() {
   tableau.extensions.dashboardContent.dashboard.captureAsync().then(function(dataUri) {
     const screenshotPreview = document.getElementById('screenshot-preview');
@@ -168,10 +160,6 @@ async function submitFeedbackToExcel(feedbackData) {
     { fieldName: 'Urgent Flag', value: urgentFlag ? 'Yes' : 'No' }
   ];
 
-  /* 
-    Here, you'd integrate with Tableau's data source API to insert the new record into the Excel sheet.
-    Currently, this logs the new record for debugging purposes.
-  */
   console.log('New feedback record to be inserted into Excel:', newRecord);
 
   // Insert the new record into the Excel data source (actual implementation required here)
