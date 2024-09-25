@@ -1,70 +1,46 @@
 /*
   Name: style.css
-  Purpose: Custom styling for the Feedback Extension UI.
+  Purpose: Custom styles for feedback extension form, button hover/press effect, and urgent flag display.
   Author: Surya Kant Mani
-  Version: 1.0.9
+  Version: 1.2.1
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Updated shine effect, text enlargement on hover, and curved shine strip for three-dimensional effect, added dynamic form width, and improved image handling.
+  Update Description: Added button press effect and dynamic urgent flag section styling.
   Production Go-Live Date: N/A
 */
 
-/* Shine effect for buttons with curved strip */
-.shine-effect {
-  position: relative;
-  overflow: hidden;
+/* Button styling for Submit and Close buttons */
+.btn-pressable {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
-.shine-effect::before {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
-  transform: rotate(45deg);
-  transition: all 0.6s ease-in-out;
+.btn-pressable:active {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
 }
 
-.shine-effect:hover::before {
-  top: 200%;
-  left: 200%;
+.submit-btn {
+  background-color: #192232;
+  color: #dde3e9;
+  width: 48%;
 }
 
-/* Text enlargement on hover */
-.shine-effect:hover {
-  font-size: 1.1em; /* Slight text enlargement */
-}
-
-/* Close button styling (replacing cross button) */
-.btn-close-custom {
+.close-btn {
   background-color: #dde3e9;
-  color: #dd3e39;
-  border-radius: 12px;
-  border: none;
-  font-size: 14px;
-  padding: 5px 12px;
+  color: #192232;
+  width: 48%;
 }
 
-.btn-close-custom:hover {
-  font-size: 1.1em; /* Enlarge text on hover */
-  background-color: #d0d0d0;
-  color: #b30000;
+.submit-btn:hover, .close-btn:hover {
   cursor: pointer;
 }
 
-/* Image or Screenshot preview styling */
-#image-preview {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Styling for the Mark as Urgent section */
+#urgent-flag-section {
+  display: none; /* Initially hidden */
 }
 
-#image-preview img {
-  max-width: 100%;
-  border: 1px solid #192232;
-  border-radius: 8px;
-  margin-top: 10px;
+#urgent-flag-section.active {
+  display: block;
 }
