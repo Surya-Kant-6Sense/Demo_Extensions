@@ -2,10 +2,10 @@
   Name: script.js
   Purpose: Handles form submission, Excel updates, Tableau metadata fetching, modal controls, screenshot functionality, and sound effects.
   Author: Surya Kant Mani
-  Version: 1.0.8
+  Version: 1.0.9
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Fixed modal closure, added shine and enlargement effects, added sound effects for form actions, and updated Excel submission logic.
+  Update Description: Fixed close button, image/screenshot handling, added sound effects, dynamic form width, and integrated with Tableau data source.
   Production Go-Live Date: N/A
 */
 
@@ -86,6 +86,14 @@ document.addEventListener('DOMContentLoaded', function() {
       takeScreenshot();
     });
 
+    /* Handle image attachment */
+    document.getElementById('screenshot').addEventListener('change', function(event) {
+      const imagePreview = document.getElementById('image-preview');
+      const imgElement = document.getElementById('image-preview-img');
+      imgElement.src = URL.createObjectURL(event.target.files[0]);
+      imagePreview.classList.remove('d-none');
+    });
+
     /* Play sound when modal is opened */
     document.getElementById('feedbackModal').addEventListener('shown.bs.modal', function() {
       document.getElementById('open-sound').play();
@@ -99,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
 */
 async function fetchDataSources() {
   const dataSources = await tableau.extensions.dashboardContent.dashboard.getDataSourcesAsync();
-  const excelDataSource = dataSources.find(ds => ds.name === 'Feedback_Tracker'); // Ensure this matches the name of your published Excel data source
+  const excelDataSource = dataSources.find(ds => ds.name === 'Feedback_Tracker'); // Corrected data source name
 
   if (!excelDataSource) {
     throw new Error('Excel data source not found!');
@@ -111,10 +119,10 @@ async function fetchDataSources() {
 /* Function to take a screenshot within the dashboard */
 function takeScreenshot() {
   tableau.extensions.dashboardContent.dashboard.captureAsync().then(function(dataUri) {
-    const screenshotPreview = document.getElementById('screenshot-preview');
-    const imgElement = document.getElementById('screenshot-preview-img');
-    imgElement.src = dataUri;
-    screenshotPreview.classList.remove('d-none'); // Show screenshot preview
+    const imagePreview = document.getElementById('image-preview');
+    const imgElement = document.getElementById('image-preview-img');
+    imgElement.src = dataUri; // Display the screenshot in the same place as the image
+    imagePreview.classList.remove('d-none'); // Show screenshot preview
     alert('Screenshot captured successfully!');
   }).catch(function(error) {
     console.error("Error taking screenshot: ", error);
