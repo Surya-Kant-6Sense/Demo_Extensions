@@ -2,11 +2,10 @@
   Name: style.css
   Purpose: Custom styling for the Feedback Extension UI.
   Author: Surya Kant Mani
-  Version: 1.0.0
-  Created At: September 27, 2024
-  Updated At: N/A
-  Updated By: N/A
-  Update Description: Initial version.
+  Version: 1.0.2
+  Created At: September 25, 2024
+  Updated At: September 25, 2024
+  Update Description: Updated colors to #192232 and #dde3e9, added dynamic 3D button styling, and changed font size.
   Production Go-Live Date: N/A
 */
 
@@ -15,7 +14,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #13bbb2;
+  background-color: #192232;
   border-radius: 50%;
   padding: 15px;
   cursor: pointer;
@@ -34,51 +33,45 @@
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header {
-  background-color: #13bbb2;
-  color: white;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-}
-
-.modal-title {
-  font-weight: bold;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-/* Gradient button styling */
-.gradient-btn {
-  background: linear-gradient(135deg, #13bbb2, #ff583d);
-  color: white;
-  border: none;
+/* Submit button with 3D effect */
+.dynamic-btn {
+  background-color: #192232;
+  color: #dde3e9;
+  font-size: 12px;
   padding: 10px 20px;
   border-radius: 10px;
-  transition: background 0.3s ease;
-  font-weight: bold;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.gradient-btn:hover {
-  background: linear-gradient(135deg, #ff583d, #13bbb2);
+.dynamic-btn:hover {
+  background-color: #dde3e9;
+  color: #192232;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Styling for the Cancel button */
-.btn-outline-danger {
-  border: 2px solid #ff583d;
-  color: #ff583d;
-  padding: 10px 20px;
-  font-weight: bold;
+/* Styling for form labels */
+.form-label {
+  font-size: 14px;
+  color: #192232;
 }
 
-.btn-outline-danger:hover {
-  background-color: #ff583d;
-  color: white;
+.form-control {
+  font-size: 12px;
+  color: #192232;
 }
 
-/* Thank You Message styling */
-#thank-you-message {
-  text-align: center;
-  margin-top: 20px;
+#feedback-text {
+  font-size: 11px;
+}
+
+#thank-you-message h5 {
+  font-size: 14px;
+  color: #192232;
+}
+
+#thank-you-message p {
+  font-size: 12px;
 }
