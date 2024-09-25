@@ -20,11 +20,13 @@
   "version": "1.0.1",
   "author": "Surya Kant Mani",
   "homepage": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/",
-  "icon": "assets/feedback-icon.png",
-  "script": "script.js",
-  "style": "style.css",
+  "main_html_file": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/index.html",
+  "icon url": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/Assets/feedback-icon.png",
+  "script": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/script.js",
+  "style": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/style.css",
+  "permissions" : ["tableau"]
   "ui": {
-    "html": "index.html",
+    "html": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/index.html",
     "width": 800,
     "height": 600
   }
