@@ -1,14 +1,26 @@
+/*
+  Name: manifest.json
+  Purpose: Manifest file to define the Feedback Extension in Tableau
+  Author: Surya Kant Mani
+  Version: 1.0.1
+  Created At: September 25, 2024
+  Updated At: September 25, 2024
+  Updated By: N/A
+  Update Description: Added file information and finalized manifest for extension.
+  Production Go-Live Date: N/A
+  Developer Notes:
+  - This file links the necessary HTML, CSS, and JS files to run the extension in Tableau.
+  - It also provides metadata like the extension name, version, author, and file paths.
+*/
+
 {
   "manifest-version": "1",
-  "name": "6Sight Feedback Extension",
-  "description": "Extension for submitting and tracking feedback within Tableau dashboards.",
-  "version": "1.0.0",
+  "name": "Feedback Extension",
+  "description": "An extension for submitting feedback, sending Slack notifications, and creating Jira tickets.",
+  "version": "1.0.1",
   "author": "Surya Kant Mani",
-  "permissions": [
-    "extensions"
-  ],
   "homepage": "https://surya-kant-6sense.github.io/Demo_Extensions/Feedback_Extension/",
-  "icon": "Assets/feedback-icon.jpg",
+  "icon": "assets/feedback-icon.png",
   "script": "script.js",
   "style": "style.css",
   "ui": {
