@@ -1,13 +1,10 @@
 <!--
   Name: index.html
-  Purpose: Main UI for 6Sight Feedback extension.
+  Purpose: Feedback Form for submitting feedback to the 6Sight Feedback Extension
   Author: Surya Kant Mani
-  Date: September 25, 2024
-  Version ID: 1.0.0
-  Updates in the Version: First complete version with Tableau integration, Slack profile image in chat, feedback summaries, Jira interaction.
-  Last Modified By: Surya Kant Mani
-  Last Modified Date: September 25, 2024
-  Developer's Note: Keep logic separation for feedback and Slack/Jira integration. Ensure logo sync with Tableau Cloud.
+  Date: September 26, 2024
+  Version: 1.0.0
+  Developer Notes: This file is responsible for rendering the Feedback Form UI, including capturing dashboard information and user feedback.
 -->
 
 <!DOCTYPE html>
@@ -15,115 +12,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>6Sight Feedback</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <title>6Sight Feedback Form</title>
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Tableau Logo - Automatically synced from Tableau Cloud -->
-  <div class="text-center mb-4">
-    <img id="tableau-logo" alt="6Sight Logo" />
-  </div>
+  <div id="feedback-form-container" class="container">
+    <!-- Feedback Form -->
+    <h1>6Sight Feedback Form</h1>
+    <form id="feedback-form">
+      <!-- Dashboard field - uneditable, pre-filled with workbook name -->
+      <div>
+        <label for="dashboard">Dashboard</label>
+        <input type="text" id="dashboard" disabled>
+      </div>
 
-  <!-- Feedback Form UI -->
-  <div id="feedback-form-container" class="container mt-5">
-    <h1 class="text-center">6Sight Feedback Form</h1>
-    <p class="text-center"><em id="workbook-name"></em> - <em id="dashboard-name"></em></p>
+      <!-- Screen field - uneditable, pre-filled with the name of the current view -->
+      <div>
+        <label for="screen">Screen</label>
+        <input type="text" id="screen" disabled>
+      </div>
 
-    <!-- Top-right 'Track Previous Feedback' button -->
-    <div class="text-end">
-      <button type="button" id="track-feedbacks" class="btn btn-link">Track Previous Feedbacks</button>
-    </div>
+      <!-- View - Drop-down for selecting the sheet the user interacted with -->
+      <div>
+        <label for="view">View</label>
+        <select id="view">
+          <!-- Dynamically populate sheet names -->
+        </select>
+        <input type="checkbox" id="no-view" /> Not related to any view
+      </div>
 
-    <form id="feedback-form" class="shadow p-4 rounded">
-      <div class="mb-3">
-        <label for="feedback-type" class="form-label">Feedback Type</label>
-        <select id="feedback-type" class="form-select" required>
-          <option value="general">General Feedback</option>
+      <!-- Feedback Type dropdown -->
+      <div>
+        <label for="feedback-type">Type</label>
+        <select id="feedback-type">
           <option value="feature">Feature Request</option>
-          <option value="enhancement">Enhancement</option>
+          <option value="general">General Feedback</option>
           <option value="data_anomaly">Data Anomaly</option>
+          <option value="ui_enhancement">UI Enhancement</option>
           <option value="question">Question</option>
         </select>
       </div>
 
-      <!-- 'Mark as Urgent' checkbox for Data Anomalies -->
-      <div class="form-check mb-3 d-none" id="urgent-container">
-        <input type="checkbox" class="form-check-input" id="mark-urgent">
-        <label class="form-check-label" for="mark-urgent">Mark as Urgent</label>
+      <!-- Mark as Urgent for Data Anomaly -->
+      <div id="urgent-container" class="d-none">
+        <input type="checkbox" id="mark-urgent"> Mark as Urgent
       </div>
 
-      <div class="form-check mb-3">
-        <input type="checkbox" class="form-check-input" id="for-specific-sheet">
-        <label class="form-check-label" for="for-specific-sheet">Feedback for specific visual?</label>
+      <!-- Feedback text box -->
+      <div>
+        <label for="feedback-text">Feedback</label>
+        <textarea id="feedback-text" placeholder="In case of multiple feedbacks, please separate them with a semicolon ‘;’"></textarea>
       </div>
 
-      <div class="mb-3">
-        <label for="sheet-select" class="form-label">Select Sheet</label>
-        <select id="sheet-select" class="form-select" disabled></select>
+      <!-- Insert Image buttons -->
+      <div>
+        <label>Insert Image</label>
+        <button type="button" id="insert-image">Insert Image</button>
+        <button type="button" id="take-screenshot">Take Dashboard Screenshot</button>
+        <div id="screenshot-preview"></div>
       </div>
 
-      <div class="mb-3">
-        <label for="feedback-text" class="form-label">Describe your feedback</label>
-        <textarea id="feedback-text" class="form-control" rows="4" required></textarea>
+      <!-- User name display -->
+      <div>
+        <p>Submitting as <strong id="username-display"></strong></p>
       </div>
 
-      <!-- Screenshot and Image Upload -->
-      <button type="button" id="capture-screenshot" class="btn btn-secondary mb-2">Capture Screenshot</button>
-      <input type="file" id="attach-image" accept="image/*" class="form-control mb-2">
-      <img id="screenshot-preview" class="img-fluid mt-2 d-none" />
-
-      <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Submit Feedback</button>
-        <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+      <!-- Form buttons -->
+      <div class="form-buttons">
+        <button type="submit" id="submit-feedback">Submit</button>
+        <button type="button" id="cancel-feedback">Cancel</button>
       </div>
-
     </form>
 
-    <div id="success-message" class="alert alert-success mt-4 d-none">Feedback submitted successfully!</div>
+    <!-- Button to Track Previous Submissions -->
+    <button id="track-previous">Track Previous Submissions</button>
   </div>
 
-  <!-- Feedback Details UI -->
-  <div id="feedback-details-container" class="container mt-5 d-none">
-    <h1 class="text-center">Feedback Details</h1>
-    <p class="text-center">Manage and track feedback resolution.</p>
-
-    <!-- Table for displaying feedback details -->
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Feedback ID</th>
-          <th>Feedback Type</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="feedback-details-body">
-        <!-- Populated dynamically -->
-      </tbody>
+  <div id="feedback-list-container" class="container d-none">
+    <!-- Feedback List -->
+    <h2>Your Feedback Submissions</h2>
+    <table id="feedback-list-table">
+      <!-- Table populated by JS -->
     </table>
 
-    <button type="button" id="back-to-form" class="btn btn-link">Back to Feedback Form</button>
-  </div>
-
-  <!-- Comments Chat UI with Slack Integration -->
-  <div id="comments-chat-container" class="container mt-5 d-none">
-    <h1 class="text-center">Feedback Comments</h1>
-    <div class="chat-box border p-4">
-      <div id="chat-messages" style="height: 300px; overflow-y: scroll;">
-        <!-- Comments dynamically populated with Slack profile images -->
-      </div>
+    <!-- Comments Section -->
+    <h2>Comments</h2>
+    <div id="comments-container">
+      <!-- Comments populated by JS -->
     </div>
-    
-    <textarea id="new-comment" class="form-control mt-3" rows="3" placeholder="Type your comment..."></textarea>
-    <button type="button" id="submit-comment" class="btn btn-primary mt-2">Submit Comment</button>
-    <button type="button" id="back-to-feedbacks" class="btn btn-link mt-2">Back to Feedbacks</button>
+    <textarea id="new-comment" placeholder="Add a comment..."></textarea>
+    <button id="submit-comment">Submit Comment</button>
   </div>
 
-  <!-- Required Libraries -->
-  <script src="https://unpkg.com/@tableau/extensions-api"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0-alpha.12/html2canvas.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js"></script> <!-- JavaScript logic in script.js -->
 </body>
 </html>
