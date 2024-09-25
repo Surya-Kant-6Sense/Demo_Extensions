@@ -35,13 +35,13 @@
 
 /* Cross button with dynamic hover effect */
 .btn-close {
-  transition: transform 0.3s ease;
-  font-size: 1.2rem;
+  transition: transform 0.5s ease;
+  font-size: 1.4rem;
 }
 
 .btn-close:hover {
   transform: rotate(360deg);
-  color: #dd3e39; /* Bright red color for visibility */
+  color: #dde3e9; /* Grey color for visibility */
   font-size: 1.3rem; /* Slightly larger on hover */
 }
 
