@@ -8,7 +8,7 @@
     "extensions"
   ],
   "homepage": "https://github.com/your-repo-link",
-  "icon": "path/to/feedback-icon.png",
+  "icon": "Assets/feedback-icon.jpg",
   "script": "script.js",
   "style": "style.css",
   "ui": {
