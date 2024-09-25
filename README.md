@@ -12,7 +12,7 @@ Each extension is placed in its own subdirectory with the necessary files and de
 - **Description**: A feedback extension for Tableau dashboards with Slack and Jira integration. Allows users to submit feedback directly from Tableau and track it through Slack or Jira.
 - **Directory**: `Feedback_Extension`
 - **Status**: Version 1.0.0
-
+ 
 ---
 
 ## Repository Structure
