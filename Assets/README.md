@@ -1,7 +1,7 @@
 # Assets Folder
 
 ## Purpose:
-The **assets** folder contains media files used in the **6Sight Extensions**. These assets primarily include icons and images required for the user interface of the extension.
+The **assets** folder contains media files used in the **Extensions**. These assets primarily include icons and images required for the user interface of the extension.
 
 ## Files:
 - **feedback-icon.png**: This icon represents the Feedback Extension and is used in the Tableau Extension Gallery and throughout the extension’s user interface.
