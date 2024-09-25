@@ -1,18 +1,16 @@
 /*
   Name: script.js
-  Purpose: Handles form submission, Slack notifications, and modal close actions for the Feedback Extension.
+  Purpose: Handles form submission, Slack notifications, and Excel updates for the Feedback Extension.
   Author: Surya Kant Mani
-  Version: 1.0.1
-  Created At: September 27, 2024
-  Updated At: September 27, 2024
-  Updated By: N/A
-  Update Description: Added logic to close the modal on Cancel and Close buttons.
+  Version: 1.0.3
+  Created At: September 25, 2024
+  Updated At: September 25, 2024
+  Update Description: Screenshot will only be sent via Slack, not stored in Excel.
   Production Go-Live Date: N/A
 */
 
 /* When the document is ready */
 document.addEventListener('DOMContentLoaded', function() {
-  /* Initialize Tableau Extension */
   tableau.extensions.initializeAsync().then(() => {
     const dashboard = tableau.extensions.dashboardContent.dashboard;
 
@@ -47,21 +45,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const view = document.getElementById('view').value;
     const feedbackType = document.getElementById('feedback-type').value;
     const feedbackText = document.getElementById('feedback-text').value;
+    const screenshot = document.getElementById('screenshot').files[0]; // Capture the attached screenshot/image
 
-    /* Split feedback by semicolon (;) and generate sequential IDs */
-    const feedbackArray = feedbackText.split(';');
-    const lastId = getLastFeedbackId();  // Function to retrieve last ID from Excel
-    feedbackArray.forEach((feedback, index) => {
-      const feedbackId = generateNextId(lastId, index);  // Function to generate sequential ID
-      submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedback.trim(), feedbackId);
-    });
+    /* Submit feedback (without screenshot) to Excel */
+    submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText);
+
+    /* Send Slack notification with optional screenshot */
+    sendSlackNotification(dashboard, screen, view, feedbackType, feedbackText, screenshot);
 
     /* Show Thank You message after submission */
     document.getElementById('thank-you-message').classList.remove('d-none');
     document.getElementById('feedback-form').classList.add('d-none');
   });
 
-  /* Handle close modal on buttons */
+  /* Handle close modal on cross icon */
   const closeModalButtons = document.querySelectorAll('.close-modal');
   closeModalButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -73,19 +70,35 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* Function to get the last feedback ID from Excel (placeholder logic) */
-function getLastFeedbackId() {
-  return 'FB-010';  // Placeholder for the last ID; should be retrieved from the Excel file
-}
-
-/* Function to generate the next sequential feedback ID */
-function generateNextId(lastId, index) {
-  const idNumber = parseInt(lastId.split('-')[1]) + index + 1;
-  return `FB-${idNumber.toString().padStart(3, '0')}`;
-}
-
-/* Function to submit feedback to the published Excel on Tableau Cloud */
-function submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText, feedbackId) {
+/* Function to submit feedback (without screenshot) to the published Excel on Tableau Cloud */
+function submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText) {
   /* Logic to integrate with Tableau Extensions API and submit to the Excel data source */
-  console.log('Feedback submitted to Excel:', { feedbackId, dashboard, screen, view, feedbackType, feedbackText });
+  console.log('Feedback submitted to Excel:', { dashboard, screen, view, feedbackType, feedbackText });
+}
+
+/* Function to send a Slack notification with screenshot (if provided) */
+function sendSlackNotification(dashboard, screen, view, feedbackType, feedbackText, screenshot) {
+  const slackMessage = `
+    *New Feedback Submitted:*
+    *Dashboard*: ${dashboard}
+    *Screen*: ${screen}
+    *View*: ${view}
+    *Feedback Type*: ${feedbackType}
+    *Feedback*: ${feedbackText}
+    ${screenshot ? '*Image Attached*' : ''}
+    Type "/jira create" to create a Jira ticket for this feedback.
+  `;
+
+  /* Send message via Tableau-Slack native integration */
+  tableau.extensions.settings.set('slackMessage', slackMessage);
+  tableau.extensions.settings.saveAsync().then(() => {
+    console.log('Slack message sent:', slackMessage);
+  });
+
+  /* Confirmation message for the user */
+  const userSlackMessage = `Your feedback has been successfully captured for *${dashboard}* and delivered to the DA Team.`;
+  tableau.extensions.settings.set('userSlackMessage', userSlackMessage);
+  tableau.extensions.settings.saveAsync().then(() => {
+    console.log('Slack message sent to user:', userSlackMessage);
+  });
 }
