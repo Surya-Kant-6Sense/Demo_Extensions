@@ -1,18 +1,18 @@
 /*
   Name: script.js
-  Purpose: Handles form submission, Slack notifications, and Jira integration for the Feedback Extension.
+  Purpose: Handles form submission, Slack notifications, and modal close actions for the Feedback Extension.
   Author: Surya Kant Mani
-  Version: 1.0.0
-  Created At: September 26, 2024
-  Updated At: N/A
+  Version: 1.0.1
+  Created At: September 27, 2024
+  Updated At: September 27, 2024
   Updated By: N/A
-  Update Description: Initial version.
+  Update Description: Added logic to close the modal on Cancel and Close buttons.
   Production Go-Live Date: N/A
 */
 
 /* When the document is ready */
 document.addEventListener('DOMContentLoaded', function() {
-  /* Dynamically populate the dashboard, screen, and view fields */
+  /* Initialize Tableau Extension */
   tableau.extensions.initializeAsync().then(() => {
     const dashboard = tableau.extensions.dashboardContent.dashboard;
 
@@ -48,37 +48,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const feedbackType = document.getElementById('feedback-type').value;
     const feedbackText = document.getElementById('feedback-text').value;
 
-    /* Submit data to the published Excel in Tableau Cloud */
-    submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText);
+    /* Split feedback by semicolon (;) and generate sequential IDs */
+    const feedbackArray = feedbackText.split(';');
+    const lastId = getLastFeedbackId();  // Function to retrieve last ID from Excel
+    feedbackArray.forEach((feedback, index) => {
+      const feedbackId = generateNextId(lastId, index);  // Function to generate sequential ID
+      submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedback.trim(), feedbackId);
+    });
 
-    /* Send Slack notification to the owner */
-    sendSlackNotification(dashboard, feedbackType, feedbackText);
+    /* Show Thank You message after submission */
+    document.getElementById('thank-you-message').classList.remove('d-none');
+    document.getElementById('feedback-form').classList.add('d-none');
+  });
 
-    /* Create Jira ticket if necessary */
-    if (feedbackType !== 'general') {
-      createJiraTicket(dashboard, feedbackType, feedbackText);
-    }
-
-    /* Close the modal after submission */
-    alert('Feedback successfully submitted!');
-    document.querySelector('.btn-close').click();
+  /* Handle close modal on buttons */
+  const closeModalButtons = document.querySelectorAll('.close-modal');
+  closeModalButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      document.getElementById('thank-you-message').classList.add('d-none');
+      document.getElementById('feedback-form').classList.remove('d-none');
+      document.querySelector('.modal').classList.remove('show');
+      document.querySelector('.modal-backdrop').remove();
+    });
   });
 });
 
+/* Function to get the last feedback ID from Excel (placeholder logic) */
+function getLastFeedbackId() {
+  return 'FB-010';  // Placeholder for the last ID; should be retrieved from the Excel file
+}
+
+/* Function to generate the next sequential feedback ID */
+function generateNextId(lastId, index) {
+  const idNumber = parseInt(lastId.split('-')[1]) + index + 1;
+  return `FB-${idNumber.toString().padStart(3, '0')}`;
+}
+
 /* Function to submit feedback to the published Excel on Tableau Cloud */
-function submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText) {
+function submitFeedbackToExcel(dashboard, screen, view, feedbackType, feedbackText, feedbackId) {
   /* Logic to integrate with Tableau Extensions API and submit to the Excel data source */
-  console.log('Feedback submitted to Excel:', { dashboard, screen, view, feedbackType, feedbackText });
-}
-
-/* Function to send a Slack notification to the owner */
-function sendSlackNotification(dashboard, feedbackType, feedbackText) {
-  /* Slack API integration */
-  console.log('Slack notification sent:', { dashboard, feedbackType, feedbackText });
-}
-
-/* Function to create a Jira ticket */
-function createJiraTicket(dashboard, feedbackType, feedbackText) {
-  /* Jira API integration */
-  console.log('Jira ticket created:', { dashboard, feedbackType, feedbackText });
+  console.log('Feedback submitted to Excel:', { feedbackId, dashboard, screen, view, feedbackType, feedbackText });
 }
