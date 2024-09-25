@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 
-/* Image preview styling (same for screenshot) */
+/* Image or Screenshot preview styling */
 #image-preview {
   display: flex;
   flex-direction: column;
@@ -67,9 +67,4 @@
   border: 1px solid #192232;
   border-radius: 8px;
   margin-top: 10px;
-}
-
-/* Dynamic textarea growth */
-textarea {
-  resize: both;
 }
