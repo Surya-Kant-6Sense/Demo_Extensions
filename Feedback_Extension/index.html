@@ -2,10 +2,10 @@
   Name: index.html
   Purpose: Feedback Form for submitting feedback to the Feedback Extension
   Author: Surya Kant Mani
-  Version: 1.0.6
+  Version: 1.0.7
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Centered Submit button, added dynamic cross button, aligned file and screenshot options horizontally, updated icon defaults, and more.
+  Update Description: Added shine effect to buttons, made the extension button rectangular, added screenshot preview, removed 'Not related to any view' checkbox, and more.
   Production Go-Live Date: N/A
 -->
 
@@ -23,18 +23,18 @@
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Extension Icon/Button to Open Modal -->
-  <button class="btn feedback-btn" id="open-modal-btn" data-bs-toggle="modal" data-bs-target="#feedbackModal" style="background-color: #192232; color: #dde3e9; font-size: 10px;">
+  <!-- Extension Button with Shine Effect -->
+  <button class="btn feedback-btn shine-effect" id="open-modal-btn" data-bs-toggle="modal" data-bs-target="#feedbackModal" style="background-color: #192232; color: #dde3e9; font-size: 10px; border-radius: 12px;">
     Feedback
   </button>
 
-  <!-- Feedback Form Modal -->
-  <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+  <!-- Feedback Form Modal with Genie effect -->
+  <div class="modal fade modal-genie" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm"> <!-- Smaller modal width -->
       <div class="modal-content">
         <div class="modal-header" style="background-color: #192232;">
-          <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9;">Submit Your Feedback</h5>
-          <button type="button" class="btn-close close-modal" aria-label="Close" style="color: grey;"></button> <!-- Updated cross button -->
+          <h5 class="modal-title" id="feedbackModalLabel" style="color: #dde3e9; font-size: 14px;">Submit Your Feedback</h5> <!-- Reduced font size by 1px -->
+          <button type="button" class="btn-close close-modal" aria-label="Close" style="color: #dd3e39; font-size: 1.1em;"></button> <!-- Updated cross button -->
         </div>
         <div class="modal-body">
           <!-- Thank You Message (Initially Hidden) -->
@@ -57,17 +57,13 @@
               <input type="text" class="form-control" id="screen" style="font-size: 11px;">
             </div>
 
-            <!-- View field: Dropdown containing the name of the last interacted sheet -->
+            <!-- View field: Dropdown containing the name of the last interacted sheet, 'Entire Screen' as the default -->
             <div class="mb-3">
               <label for="view" class="form-label" style="font-size: 11px; color: #192232;">View</label>
-              <div class="input-group">
-                <select class="form-select" id="view" style="font-size: 11px;">
-                  <!-- Dynamically populated with the sheet names -->
-                </select>
-                <span class="input-group-text" style="background-color: #dde3e9; margin-left: 10px;">
-                  <input type="checkbox" id="no-view" style="font-size: 10px;"> Not related to any view
-                </span>
-              </div>
+              <select class="form-select" id="view" style="font-size: 11px;">
+                <option value="entire_screen">Entire Screen</option> <!-- Added 'Entire Screen' as the default option -->
+                <!-- Dynamically populated with the sheet names -->
+              </select>
             </div>
 
             <!-- Feedback Type dropdown -->
@@ -96,12 +92,18 @@
             <!-- Image/Screenshot Attachment (aligned horizontally) -->
             <div class="mb-3 d-flex justify-content-between">
               <input type="file" class="form-control" id="screenshot" accept="image/*" style="font-size: 11px; width: 45%;">
-              <button type="button" class="btn btn-sm btn-primary" id="take-screenshot" style="font-size: 11px; width: 45%;">Take Screenshot</button> <!-- Aligned horizontally -->
+              <button type="button" class="btn btn-sm btn-primary shine-effect" id="take-screenshot" style="font-size: 11px; width: 45%;">Take Screenshot</button> <!-- Aligned horizontally and with shine effect -->
+            </div>
+
+            <!-- Screenshot preview (Initially hidden, shown after a screenshot is taken) -->
+            <div id="screenshot-preview" class="mb-3 d-none">
+              <label for="screenshot-preview" class="form-label" style="font-size: 11px; color: #192232;">Screenshot Preview:</label>
+              <img src="" id="screenshot-preview-img" alt="Screenshot Preview" class="img-fluid" />
             </div>
 
             <!-- Submit button (center-aligned, 60% width) -->
             <div class="form-buttons d-flex justify-content-center">
-              <button type="submit" class="btn dynamic-btn" id="submit-feedback" style="width: 60%;">Submit</button>
+              <button type="submit" class="btn dynamic-btn shine-effect" id="submit-feedback" style="width: 60%;">Submit</button> <!-- Submit button with shine effect -->
             </div>
           </form>
         </div>
