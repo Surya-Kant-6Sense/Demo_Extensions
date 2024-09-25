@@ -1,0 +1,63 @@
+/*
+  Name: style.css
+  Purpose: Styling for 6Sight Feedback extension with brand colors.
+  Author: Surya Kant Mani
+  Date: September 25, 2024
+  Version ID: 1.0.0
+  Updates in the Version: Applied brand colors for primary and secondary buttons, accessible color scheme.
+  Last Modified By: Surya Kant Mani
+  Last Modified Date: September 25, 2024
+  Developer's Note: Maintain high contrast for clickable elements and ensure accessibility compliance.
+*/
+
+body {
+  background-color: #f5f7fa;
+}
+
+h1 {
+  color: #192232; /* Dark blue */
+}
+
+#feedback-form {
+  background-color: white;
+}
+
+#feedback-details-container,
+#comments-chat-container {
+  display: none;
+}
+
+.chat-box {
+  background-color: #fff;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+#success-message {
+  text-align: center;
+  color: #2b9348;
+}
+
+#urgent-container {
+  display: none;
+}
+
+.btn-primary {
+  background-color: #13bbb2;
+  border-color: #13bbb2;
+}
+
+.btn-secondary {
+  background-color: #ff583d;
+  border-color: #ff583d;
+}
+
+.btn-link {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.table thead th {
+  background-color: #192232;
+  color: #fff;
+}
