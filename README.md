@@ -32,6 +32,7 @@ ExtensionsRepository/
 │
 ├── 6SightFeedbackExtension/  # Directory for the 6Sight Feedback extension
 │   ├── index.html
+│   ├── tracker.html
 │   ├── script.js
 │   ├── style.css
 │   ├── manifest.json
