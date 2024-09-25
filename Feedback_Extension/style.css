@@ -1,13 +1,24 @@
 /*
   Name: style.css
-  Purpose: Custom styles for feedback extension form, button hover/press effect, and urgent flag display.
+  Purpose: Responsive styling to fit the feedback form into Tableau's extension container and handle button effects.
   Author: Surya Kant Mani
-  Version: 1.2.1
+  Version: 1.2.3
   Created At: September 25, 2024
   Updated At: September 25, 2024
-  Update Description: Added button press effect and dynamic urgent flag section styling.
+  Update Description: Adjusted form height, container fluidity, and added pressing button effect.
   Production Go-Live Date: N/A
 */
+
+/* Ensure the feedback form takes up the entire container */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid {
+  height: 100%;
+}
 
 /* Button styling for Submit and Close buttons */
 .btn-pressable {
@@ -36,7 +47,7 @@
   cursor: pointer;
 }
 
-/* Styling for the Mark as Urgent section */
+/* Urgent flag visibility */
 #urgent-flag-section {
   display: none; /* Initially hidden */
 }
