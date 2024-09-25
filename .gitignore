@@ -1,0 +1,34 @@
+# Logs
+logs
+*.log
+
+# Dependency directories (for npm/yarn if needed in the future)
+node_modules/
+
+# IDE and Editor settings
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# Operating System files (Mac-specific)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Env files (if storing environment variables or API keys locally)
+.env
+*.env
+
+# Build output (if you use any build systems like Webpack in the future)
+dist/
+build/
