@@ -3,78 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feedback Extension</title>
-  <!-- Include Bootstrap for styling -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
+  <title>Enhanced Feedback Form</title>
+
+  <!-- Bootstrap CSS for clean layout and responsiveness -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Font for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Link to External CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Feedback Form inside container (Fit within Tableau Extension container) -->
-  <div class="container-fluid h-100">
-    <div class="modal-content h-100 p-3">
-      <div class="modal-header" style="background-color: #192232;">
-        <h5 class="modal-title" style="color: #dde3e9;">Submit Feedback</h5>
+  <div id="app" class="container-fluid">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Feedback Form</h2>
       </div>
-      <div class="modal-body flex-grow-1 overflow-auto">
-        <!-- Thank You Message Pop-up (Initially hidden) -->
-        <div id="thank-you-message" class="d-none">
-          <h5 style="color: #192232;">Thank you for your feedback!</h5>
-          <p>A member of the DA Team will reach out to you regarding your feedback soon.</p>
+
+      <form @submit.prevent="submitForm">
+        <div class="form-group mb-3">
+          <label for="dashboard">Dashboard</label>
+          <input v-model="form.dashboard" type="text" id="dashboard" name="dashboard" class="form-control" readonly>
         </div>
 
-        <!-- Feedback Form -->
-        <form id="feedback-form" class="d-flex flex-column h-100">
-          <!-- Workbook Name -->
-          <div class="mb-3">
-            <label for="dashboard" class="form-label">Dashboard</label>
-            <input type="text" class="form-control" id="dashboard" disabled>
-          </div>
-          <!-- Screen Name -->
-          <div class="mb-3">
-            <label for="screen" class="form-label">Screen</label>
-            <input type="text" class="form-control" id="screen" disabled>
-          </div>
-          <!-- View Dropdown -->
-          <div class="mb-3">
-            <label for="view" class="form-label">View</label>
-            <select class="form-select" id="view"></select>
-          </div>
-          <!-- Feedback Type -->
-          <div class="mb-3">
-            <label for="feedback-type" class="form-label">Feedback Type</label>
-            <select class="form-select" id="feedback-type">
-              <option value="feature">Feature Request</option>
-              <option value="general">General Feedback</option>
-              <option value="data_anomaly">Data Anomaly</option>
-              <option value="ui_enhancement">UI Enhancement</option>
-              <option value="question">Question</option>
-            </select>
-          </div>
-          <!-- Mark as Urgent (only appears when "Data Anomaly" is selected) -->
-          <div class="mb-3 d-none" id="urgent-flag-section">
-            <input type="checkbox" id="mark-urgent" class="form-check-input">
-            <label for="mark-urgent" class="form-check-label">Mark as Urgent</label>
-          </div>
-          <!-- Feedback Text Area -->
-          <div class="mb-3 flex-grow-1">
-            <label for="feedback-text" class="form-label">Feedback</label>
-            <textarea class="form-control" id="feedback-text" rows="3" placeholder="Enter feedback"></textarea>
-          </div>
-          <!-- Submit and Close Buttons -->
-          <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-pressable submit-btn" id="submit-feedback">Submit</button>
-            <button type="button" class="btn btn-pressable close-btn" id="close-btn">Close</button>
-          </div>
-        </form>
+        <div class="form-group mb-3">
+          <label for="screen">Screen</label>
+          <input v-model="form.screen" type="text" id="screen" name="screen" class="form-control" readonly>
+        </div>
+
+        <!-- Dropdown for View (Sheets) -->
+        <div class="form-group mb-3">
+          <label for="view">View</label>
+          <select v-model="form.view" id="view" class="form-select">
+            <option value="Entire Screen">Entire Screen</option>
+            <option v-for="sheet in sheets" :value="sheet">{{ sheet }}</option>
+          </select>
+        </div>
+
+        <!-- Dropdown for Feedback Type -->
+        <div class="form-group mb-3">
+          <label for="feedback-type">Feedback Type</label>
+          <select v-model="form.feedbackType" id="feedback-type" class="form-select">
+            <option value="General Feedback">General Feedback</option>
+            <option value="Bug Report">Bug Report</option>
+            <option value="Feature Request">Feature Request</option>
+          </select>
+        </div>
+
+        <!-- Feedback Textarea -->
+        <div class="form-group mb-4">
+          <label for="feedback">Feedback</label>
+          <textarea v-model="form.feedback" id="feedback" name="feedback" placeholder="Enter your feedback" class="form-control"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-submit w-100">Submit</button>
+      </form>
+
+      <div class="form-footer mt-3">
+        Need help? <a href="mailto:example@email.com">Contact DA Team</a>
       </div>
     </div>
   </div>
 
-  <!-- Include Bootstrap JS and Popper.js -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  <!-- Include custom JavaScript -->
+  <!-- Bootstrap JS and Popper.js for interactive elements -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vue.js for interactivity -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  
+  <!-- Tableau JavaScript API -->
+  <script src="https://cdn.tableau.com/libs/tableau-2.8.0.min.js"></script>
+
+  <!-- Link to External JS -->
   <script src="script.js"></script>
 </body>
 </html>
