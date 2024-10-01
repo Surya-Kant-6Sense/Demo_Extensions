@@ -37,12 +37,21 @@ new Vue({
       tableau.extensions.initializeAsync().then(() => {
         const dashboard = tableau.extensions.dashboardContent.dashboard;
 
+        // Log to check the workbook and dashboard names
+        console.log("Workbook Name: ", dashboard.workbook.name);
+        console.log("Dashboard Name: ", dashboard.name);
+
         // Populate dashboard and screen details
         this.form.dashboard = dashboard.workbook.name;
         this.form.screen = dashboard.name;
 
         // Fetch sheets (views) from the current dashboard
         this.sheets = dashboard.worksheets.map(sheet => sheet.name);
+
+        // Log sheets to verify if they are correctly populated
+        console.log("Sheets: ", this.sheets);
+      }).catch(error => {
+        console.error("Error initializing Tableau extension: ", error);
       });
     },
     resizeToFitTableau() {
@@ -108,4 +117,5 @@ new Vue({
       });
     }
   }
+});
 });
