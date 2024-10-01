@@ -25,7 +25,7 @@ new Vue({
       feedback: ''
     },
     sheets: [],  // Array to hold sheet names
-    slackWebhookUrl: 'https://hooks.slack.com/services/your/slack/webhook', // Replace with your Slack webhook URL
+    slackWebhookUrl: 'https://hooks.slack.com/services/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', // Replace with your Slack webhook URL
   },
   mounted() {
     this.initializeTableau();
