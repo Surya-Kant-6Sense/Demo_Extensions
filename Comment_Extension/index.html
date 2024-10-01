@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Message to Slack</title>
+  
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #app {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    .form-container {
+      text-align: center;
+    }
+
+    .form-header h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #192232;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group textarea:focus {
+      border-color: #007bff;
+    }
+
+    .submit-btn {
+      background-color: #192232;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .feedback-message {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: green;
+      display: none;
+    }
+
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Send a Message to Slack</h2>
+      </div>
+
+      <!-- Input Form -->
+      <form id="slackForm">
+        <div class="form-group">
+          <label for="messageInput">Your Message</label>
+          <textarea id="messageInput" rows="4" placeholder="Enter your message..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+
+      <!-- Feedback message -->
+      <div id="feedback" class="feedback-message">Message sent successfully!</div>
+      <div id="error" class="feedback-message error-message">Failed to send message. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- JavaScript to handle form submission -->
+  <script>
+    document.getElementById('slackForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value.trim();
+
+      if (!message) {
+        alert("Please enter a message.");
+        return;
+      }
+
+      const slackWebhookUrl = 'https://hooks.slack.com/services/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'; // Replace with your Slack Webhook URL
+
+      const slackMessage = {
+        text: `New message from Tableau Cloud Dashboard: ${message}`
+      };
+
+      // Send message to Slack
+      fetch(slackWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(slackMessage),
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById('feedback').style.display = 'block';
+          document.getElementById('error').style.display = 'none';
+          messageInput.value = ''; // Clear the input
+        } else {
+          document.getElementById('error').style.display = 'block';
+          document.getElementById('feedback').style.display = 'none';
+        }
+      })
+      .catch(() => {
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('feedback').style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
